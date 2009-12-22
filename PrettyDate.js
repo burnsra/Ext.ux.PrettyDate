@@ -1,6 +1,6 @@
 (function() {
 	Ext.ns('Ext.ux');
-	Ext.ux.prettyDate = function(){
+	Ext.ux.PrettyDate = function(){
 		var defaultConfig = function(){
 			return{
 				refreshInterval: 60
