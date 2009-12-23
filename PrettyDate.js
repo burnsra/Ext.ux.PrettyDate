@@ -21,16 +21,6 @@
 				}
 			}
 		}
-		
-		function parseDate(str, formats){
-			var d = null;
-			for ( i = 0; i < formats.length; i++){
-				d = Date.parseDate ( str, formats[i]);
-				if(d) return d
-			}
-			
-			return false;
-		}
 
 		var now = function() {
 			return new Date();
@@ -39,6 +29,7 @@
 		var processOptions = function(config){
 		    var o = defaultConfig();
 	        var options = {};
+	
 	        Ext.apply(options, config, o);
 	        
 	        return options;
@@ -56,14 +47,13 @@
 			}
 
 			return day_diff == 0 && (
-					diff < 1 && options.messages.now.apply() ||
-					diff == 1 && options.messages.second.apply() ||
-					//diff < 15 && options.messages.now.apply() ||
-					diff < 60 && options.messages.seconds.apply({age:Math.floor( diff )}) ||
-					diff < 120 && options.messages.minute.apply() ||
-					diff < 3600 && options.messages.minutes.apply({age:Math.floor( diff / 60 )}) ||
-					diff < 7200 && options.messages.hour.apply() ||
-					diff < 86400 && options.messages.hours.apply({age:Math.floor( diff / 3600 )})) ||
+				diff < 1 && options.messages.now.apply() ||
+				diff == 1 && options.messages.second.apply() ||
+				diff < 60 && options.messages.seconds.apply({age:Math.floor( diff )}) ||
+				diff < 120 && options.messages.minute.apply() ||
+				diff < 3600 && options.messages.minutes.apply({age:Math.floor( diff / 60 )}) ||
+				diff < 7200 && options.messages.hour.apply() ||
+				diff < 86400 && options.messages.hours.apply({age:Math.floor( diff / 3600 )})) ||
 				day_diff == 1 && options.messages.yesterday.apply() ||
 				day_diff < 7 && options.messages.days.apply({age:day_diff}) ||
 				day_diff < 31 && options.messages.weeks.apply({age:Math.ceil( day_diff / 7 )});
@@ -73,6 +63,7 @@
 		return{
 			options: null
 			,items: []
+			
 			,init : function (config){
 				this.options = processOptions(config) ;
 				this.refresh();
@@ -108,7 +99,7 @@
 	            if(options.refreshInterval > 0)
 	                this.applyTo.createDelegate(this).defer(options.refreshInterval * 1000, this, [domId, config]);
 			}		
-		}//public -- end
-		
+		}
+		//public -- end
 	};
 })();
